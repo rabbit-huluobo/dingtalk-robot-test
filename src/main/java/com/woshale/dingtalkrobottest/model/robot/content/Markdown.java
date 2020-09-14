@@ -4,12 +4,13 @@ import com.woshale.dingtalkrobottest.model.robot.content.interfaces.Content;
 
 /**
  * Markdown格式
+ *
  * @author Carrot
  * @since 2020/9/14 0:52
  */
 public class Markdown implements Content {
 
-    public static final String CONTENT_NAME="markdown";
+    public static final String CONTENT_NAME = "markdown";
 
     private String title;
 

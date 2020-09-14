@@ -7,162 +7,83 @@ import java.util.List;
  * 此为body
  * -------------------------------------------------------------
  * {
- *     "msgtype": "text",
- *     "text": {
- *         "content": "我就是我, 是不一样的烟火"
- *     },
- *     "msgId": "XXXX",
- *     "createAt": 1487561654123,
- *     "conversationType": "2",
- *     "conversationId": "XXXX",
- *     "conversationTitle": "钉钉群标题",
- *     "senderId": "XXXX",
- *     "senderNick": "星星",
- *     "senderCorpId": "XXXX",
- *     "senderStaffId": "XXXX",
- *     "chatbotUserId":"XXXX",
- *     "atUsers":[
- *        {
- *          "dingtalkId":"XXXX",
- *          "staffId":"XXXX"
- *        }
- *     ]
+ * "msgtype": "text",
+ * "text": {
+ * "content": "我就是我, 是不一样的烟火"
+ * },
+ * "msgId": "XXXX",
+ * "createAt": 1487561654123,
+ * "conversationType": "2",
+ * "conversationId": "XXXX",
+ * "conversationTitle": "钉钉群标题",
+ * "senderId": "XXXX",
+ * "senderNick": "星星",
+ * "senderCorpId": "XXXX",
+ * "senderStaffId": "XXXX",
+ * "chatbotUserId":"XXXX",
+ * "atUsers":[
+ * {
+ * "dingtalkId":"XXXX",
+ * "staffId":"XXXX"
+ * }
+ * ]
  * }
  * -------------------------------------------------------------
  * 参考 https://ding-doc.dingtalk.com/doc#/serverapi2/elzz1p
+ *
  * @author Carrot
  * @since 2020/9/13 23:40
  */
 public class PostRobotRequest {
 
     /**
-     * 消息文本
-     */
-    public static class Text{
-
-        /**
-         * 消息文本
-         */
-        private String content;
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
-
-        @Override
-        public String toString() {
-            return "Text{" +
-                    "content='" + content + '\'' +
-                    '}';
-        }
-
-
-    }
-
-    /**
-     * 被@人的信息
-     */
-    public static class AtUser{
-
-        /**
-         * 加密的发送者ID
-         */
-        private String dingtalkId;
-
-        /**
-         * 发送者在企业内的userid（企业内部群有）
-         */
-        private String staffId;
-
-        public String getDingtalkId() {
-            return dingtalkId;
-        }
-
-        public void setDingtalkId(String dingtalkId) {
-            this.dingtalkId = dingtalkId;
-        }
-
-        public String getStaffId() {
-            return staffId;
-        }
-
-        public void setStaffId(String staffId) {
-            this.staffId = staffId;
-        }
-
-        @Override
-        public String toString() {
-            return "AtUser{" +
-                    "dingtalkId='" + dingtalkId + '\'' +
-                    ", staffId='" + staffId + '\'' +
-                    '}';
-        }
-    }
-
-    /**
      * 目前只支持text
      */
     private String msgtype;
-
     /**
      * 消息文本
      */
     private Text text;
-
     /**
      * 加密的消息ID
      */
     private String msgId;
-
     /**
      * 消息的时间戳，单位ms
      */
     private Long createAt;
-
     /**
      * 1-单聊、2-群聊
      */
     private String conversationType;
-
     /**
      * 加密的会话ID
      */
     private String conversationId;
-
     /**
      * 会话标题（群聊时才有）
      */
     private String conversationTitle;
-
     /**
      * 加密的发送者ID
      */
     private String senderId;
-
     /**
      * 发送者昵称
      */
     private String senderNick;
-
     /**
      * 发送者当前群的企业corpId（企业内部群有）
      */
     private String senderCorpId;
-
     /**
      * 发送者在企业内的userid（企业内部群有）
      */
     private String senderStaffId;
-
     /**
      * 加密的机器人ID
      */
     private String chatbotUserId;
-
     /**
      * 被@人的信息列表
      */
@@ -287,7 +208,75 @@ public class PostRobotRequest {
                 ", senderCorpId='" + senderCorpId + '\'' +
                 ", senderStaffId='" + senderStaffId + '\'' +
                 ", chatbotUserId='" + chatbotUserId + '\'' +
-                ", atUsers=" + (atUsers==null?"null":atUsers.toString()) +
+                ", atUsers=" + (atUsers == null ? "null" : atUsers.toString()) +
                 '}';
+    }
+
+    /**
+     * 消息文本
+     */
+    public static class Text {
+
+        /**
+         * 消息文本
+         */
+        private String content;
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        @Override
+        public String toString() {
+            return "Text{" +
+                    "content='" + content + '\'' +
+                    '}';
+        }
+
+
+    }
+
+    /**
+     * 被@人的信息
+     */
+    public static class AtUser {
+
+        /**
+         * 加密的发送者ID
+         */
+        private String dingtalkId;
+
+        /**
+         * 发送者在企业内的userid（企业内部群有）
+         */
+        private String staffId;
+
+        public String getDingtalkId() {
+            return dingtalkId;
+        }
+
+        public void setDingtalkId(String dingtalkId) {
+            this.dingtalkId = dingtalkId;
+        }
+
+        public String getStaffId() {
+            return staffId;
+        }
+
+        public void setStaffId(String staffId) {
+            this.staffId = staffId;
+        }
+
+        @Override
+        public String toString() {
+            return "AtUser{" +
+                    "dingtalkId='" + dingtalkId + '\'' +
+                    ", staffId='" + staffId + '\'' +
+                    '}';
+        }
     }
 }

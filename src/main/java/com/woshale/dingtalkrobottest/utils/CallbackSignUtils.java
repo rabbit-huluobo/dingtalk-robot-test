@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  * 回调sign工具类
+ *
  * @author Carrot
  * @since 2020/9/14 0:29
  */
@@ -17,12 +18,13 @@ public class CallbackSignUtils {
 
     /**
      * 对header中的 timestamp和sign进行验证，以判断是否是来自钉钉的合法请求人的appSecret
-     * @param sign 回调header的sign
+     *
+     * @param sign      回调header的sign
      * @param timestamp 回调header的timestamp
      * @param appSecret 机器人的appSecret
      * @return 是否通过验证
      */
-    public static boolean verifySign(String sign,Long timestamp,String appSecret){
+    public static boolean verifySign(String sign, Long timestamp, String appSecret) {
         String stringToSign = timestamp + "\n" + appSecret;
         Mac mac = null;
         try {
@@ -30,7 +32,7 @@ public class CallbackSignUtils {
         } catch (NoSuchAlgorithmException e) {
             return false;
         }
-        String correctSign=null;
+        String correctSign = null;
         try {
             mac.init(new SecretKeySpec(appSecret.getBytes("UTF-8"), "HmacSHA256"));
             byte[] signData = mac.doFinal(stringToSign.getBytes("UTF-8"));
