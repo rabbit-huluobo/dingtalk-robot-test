@@ -1,10 +1,10 @@
-package com.woshale.dingtalkrobottest.model;
+package com.woshale.dingtalkrobottest.model.robot;
 
 import java.util.List;
 
 /**
  * 当用户@机器人时，钉钉会通过机器人开发者的HTTPS服务地址，把消息内容发送出去
- * 此为响应body
+ * 此为body
  * -------------------------------------------------------------
  * {
  *     "msgtype": "text",
@@ -33,12 +33,12 @@ import java.util.List;
  * @author Carrot
  * @since 2020/9/13 23:40
  */
-public class PostRobotResponse {
+public class PostRobotRequest {
 
     /**
      * 消息文本
      */
-    static class Text{
+    public static class Text{
 
         /**
          * 消息文本
@@ -59,12 +59,14 @@ public class PostRobotResponse {
                     "content='" + content + '\'' +
                     '}';
         }
+
+
     }
 
     /**
      * 被@人的信息
      */
-    static class AtUser{
+    public static class AtUser{
 
         /**
          * 加密的发送者ID

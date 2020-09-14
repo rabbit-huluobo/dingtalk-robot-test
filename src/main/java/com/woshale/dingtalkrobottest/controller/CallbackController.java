@@ -1,12 +1,16 @@
 package com.woshale.dingtalkrobottest.controller;
 
-import com.woshale.dingtalkrobottest.DingtalkRobotTestApplication;
-import com.woshale.dingtalkrobottest.model.PostRobotResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.woshale.dingtalkrobottest.model.robot.PostRobotRequest;
+import com.woshale.dingtalkrobottest.model.robot.PostRobotResponse;
+import com.woshale.dingtalkrobottest.model.robot.content.Markdown;
 import com.woshale.dingtalkrobottest.utils.CallbackSignUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 钉钉机器人回调
@@ -29,16 +33,29 @@ import javax.servlet.http.HttpServletResponse;
 public class CallbackController {
 
     @PostMapping("/robot")
-    public void robotCallback(HttpServletRequest req, @RequestBody PostRobotResponse body){
-
+    public PostRobotResponse robotCallback(HttpServletRequest req, @RequestBody PostRobotRequest body){
+        System.out.println(body.toString());
         String reqSign=req.getHeader("sign");
         Long timestamp=Long.valueOf(req.getHeader("timestamp"));
         //todo 这里填写你的机器人的AppSecret
         if (!CallbackSignUtils.verifySign(reqSign,timestamp,"需要填写的appSecret")){
             System.out.println("sign验证错误");
-            //todo 验证错误情况下请自行处理
+            //todo 验证错误情况下业务处理
         }
-        //验证成功后，进行响应
+
+        //验证成功后，进行响应 这里用markdown举例
+        //获得了用户给机器人说的话
+        String contentHasSent=body.getText().getContent();
+        //todo 根据用户发的内容 构建title和text
+        String title="根据业务得到的标题";
+        String text="根据业务得到的文本";
+        Markdown markdown=new Markdown(title,text);
+        PostRobotResponse.AtTarget atTarget=new PostRobotResponse.AtTarget();
+        List<String> atMobiles=new ArrayList<>();
+        //todo 设置要@的人，可不填写
+        atMobiles.add("15xxxxxxxx要@人的电话号码");
+        atTarget.setAtMobiles(atMobiles);
+        return new PostRobotResponse(markdown,atTarget);
     }
 
 }

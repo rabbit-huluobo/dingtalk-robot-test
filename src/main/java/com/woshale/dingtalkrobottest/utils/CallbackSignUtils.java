@@ -20,7 +20,7 @@ public class CallbackSignUtils {
      * @param sign 回调header的sign
      * @param timestamp 回调header的timestamp
      * @param appSecret 机器人的appSecret
-     * @return
+     * @return 是否通过验证
      */
     public static boolean verifySign(String sign,Long timestamp,String appSecret){
         String stringToSign = timestamp + "\n" + appSecret;
